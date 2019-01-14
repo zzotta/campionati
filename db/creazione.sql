@@ -1,13 +1,15 @@
-create table if not exists `campionati` (
+create table `campionati` (
   `nome` text not null,
   `anno` integer not null,
   primary key(nome, anno)
 );
 
 create table `gare` (
-  `campionato` text not null,
+  `nome` text not null,
+  `anno` integer not null,
   `numero` integer not null,
-  `luogo` integer not null,
-  `data` integer not null,
-  primary key(campionato, numero)
+  `luogo` text not null,
+  `data` text not null,
+  primary key(nome, anno, numero)
+  foreign key(nome, anno) references campionato(nome, anno)
 );
