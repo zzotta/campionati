@@ -1,6 +1,7 @@
 drop table if exists gare;
 drop table if exists campionati;
 drop table if exists piloti;
+drop table if exists partecipazioni;
 
 create table if not exists campionati (
   nome text not null collate nocase,
