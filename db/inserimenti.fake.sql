@@ -10,5 +10,5 @@ insert into gare values('rocks inside champioship', 2019, 1, 'casalecchio', '15/
 insert into piloti values('massimo', 'arcara');
 insert into piloti values('marco', 'comparato');
 
--- delete from campionati where anno = 2018;
--- delete from gare where nome is null;
+delete from campionati where anno = 2018;
+delete from gare where nome is null;
