@@ -1,7 +1,9 @@
+drop table if exists manches;
+drop table if exists categorie;
+drop table if exists partecipazioni;
 drop table if exists gare;
 drop table if exists campionati;
 drop table if exists piloti;
-drop table if exists partecipazioni;
 
 create table if not exists campionati (
   nome text not null collate nocase,
@@ -33,7 +35,12 @@ create table if not exists partecipazioni (
   gara_numero integer not null,
   primary key(pilota_nome, pilota_cognome, campionato_nome, campionato_anno, gara_numero),
   foreign key(pilota_nome, pilota_cognome) references piloti(nome, cognome) on update cascade,
-  foreign key(campionato_nome, campionato_anno, gara_numero) references gare(campionato_nome, campionato_anno, numero) on update cascade
+  foreign key(campionato_nome, campionato_anno, gara_numero)
+    references gare(campionato_nome, campionato_anno, numero) on update cascade
+);
+
+create table if not exists categorie (
+  nome text not null collate nocase primary key
 );
 
 create table if not exists manches (
@@ -47,7 +54,9 @@ create table if not exists manches (
   penalita integer not null,
   verricello integer not null,
   tempo integer not null,
-  primary key(pilota_nome, pilota_cognome, gara_nome, gara_anno, gara_numero),
-  foreign key(pilota_nome, pilota_cognome) references piloti(nome, cognome) on update cascade,
-  foreign key(gara_nome, gara_anno, gara_numero) references gare(nome, anno, numero) on update cascade
+  primary key(pilota_nome, pilota_cognome, campionato_nome, campionato_anno, gara_numero, categoria, numero),
+  foreign key(pilota_nome, pilota_cognome, campionato_nome, campionato_anno, gara_numero)
+    references partecipazioni(pilota_nome, pilota_cognome, campionato_nome, campionato_anno, gara_numero)
+	on update cascade,
+  foreign key categoria references categorie(nome)
 );
