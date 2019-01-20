@@ -7,12 +7,35 @@ const sequelize = new Sequelize(null, null, null, {
   storage: path.join(__dirname, 'db/campionati.db')
 });
 
-sequelize
-  .authenticate()
-  .then(() => {
-    console.log('Connection has been established successfully.');
-  })
-  .catch(err => {
-    console.error('Unable to connect to the database:', err);
-  });
-  
+const Campionati = sequelize.define('campionati', {
+  nome: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  anno: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  }
+});
+
+const Gare = sequelize.define('gare', {
+  campionato_id: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  numero: {
+    type: Sequelize.INTEGER,
+    allowNull: false
+  },
+  luogo: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  data: {
+    type: Sequelize.DATE,
+    allowNull: false
+  }
+});
+
+Campionati.sync({force: true});
+Gare.sync({force: true});
