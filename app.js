@@ -19,10 +19,6 @@ const Campionati = sequelize.define('campionati', {
 });
 
 const Gare = sequelize.define('gare', {
-  campionato_id: {
-    type: Sequelize.INTEGER,
-    allowNull: false
-  },
   numero: {
     type: Sequelize.INTEGER,
     allowNull: false
@@ -37,5 +33,30 @@ const Gare = sequelize.define('gare', {
   }
 });
 
+const Piloti = sequelize.define('piloti', {
+  nome: {
+    type: Sequelize.STRING,
+    allowNull: false
+  },
+  cognome: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+const Categorie = sequelize.define('Categorie', {
+  nome: {
+    type: Sequelize.STRING,
+    allowNull: false
+  }
+});
+
+const Partecipazioni  = sequelize.define('partecipazioni');
+
+Gare.belongsTo(Campionati, { as: 'campionato'});
+
 Campionati.sync({force: true});
 Gare.sync({force: true});
+Partecipazioni.sync({force: true});
+Piloti.sync({force: true});
+Categorie.sync({force: true});
