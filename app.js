@@ -6,22 +6,22 @@ const sequelize = new Sequelize(
   {operatorsAliases: false}
 );
 
-const Campionati = sequelize.define('campionati', {
-  nome: {type: Sequelize.STRING },
-  anno: {type: Sequelize.INTEGER}
+const Championship = sequelize.define('championship', {
+  name: {type: Sequelize.STRING },
+  year: {type: Sequelize.INTEGER}
 });
 
-const Gare = sequelize.define('gare', {
-  numero: {type: Sequelize.INTEGER },
-  luogo:  {type: Sequelize.STRING  },
-  data:   {type: Sequelize.DATEONLY}
+const Round = sequelize.define('round', {
+  number  : {type: Sequelize.INTEGER },
+  location: {type: Sequelize.STRING  },
+  date    : {type: Sequelize.DATEONLY}
 });
 
-const Piloti = sequelize.define('piloti', {
-  nome:    {type: Sequelize.STRING},
-  cognome: {type: Sequelize.STRING}
+const Driver = sequelize.define('driver', {
+  firstName: {type: Sequelize.STRING},
+  lastName : {type: Sequelize.STRING}
 });
 
-const Categorie = sequelize.define('Categorie', {
-  nome: {type: Sequelize.STRING}
+const Class = sequelize.define('class', {
+  name: {type: Sequelize.STRING}
 });
