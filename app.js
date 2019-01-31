@@ -12,9 +12,9 @@ const Campionati = sequelize.define('campionati', {
 });
 
 const Gare = sequelize.define('gare', {
-  numero: {type: Sequelize.INTEGER},
-  luogo:  {type: Sequelize.STRING },
-  data:   {type: Sequelize.DATE   }
+  numero: {type: Sequelize.INTEGER },
+  luogo:  {type: Sequelize.STRING  },
+  data:   {type: Sequelize.DATEONLY}
 });
 
 const Piloti = sequelize.define('piloti', {
@@ -25,9 +25,3 @@ const Piloti = sequelize.define('piloti', {
 const Categorie = sequelize.define('Categorie', {
   nome: {type: Sequelize.STRING}
 });
-
-const Partecipazioni  = sequelize.define('partecipazioni');
-
-Gare.belongsTo(Campionati, { as: 'campionato'});
-
-sequelize.sync();
