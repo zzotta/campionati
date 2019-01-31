@@ -7,6 +7,7 @@ const sequelize = new Sequelize(
   {operatorsAliases: false}
 );
 
+
 const Championship = sequelize.define('championship', {
   name: {type: Sequelize.STRING },
   year: {type: Sequelize.INTEGER}
@@ -28,17 +29,15 @@ const Class = sequelize.define('class', {
 });
 
 
-const onCommand = input => console.log(input);
-
-const commands = {
-  addChampionship: onCommand,
-  addChampionshipRound: onCommand,
-  addDriver: onCommand,
-  addClass: onCommand
-};
+const commands = [
+  'addChampionship',
+  'addChampionshipRound',
+  'addDriver',
+  'addClass'
+];
 
 const completerFunction = (line) => {
-  const completions = Object.keys(commands);
+  const completions = commands;
   const hits = completions.filter((c) => c.startsWith(line));
   return [hits.length ? hits : completions, line];
 };
@@ -46,10 +45,40 @@ const completerFunction = (line) => {
 const rl = readline.createInterface({
   input : process.stdin ,
   output: process.stdout,
-  completer: completerFunction
+  completer: completerFunction,
+  prompt: 'championships$ '
+
 });
 
-rl.setPrompt('championships$ ');
+const proceedQuestion = () => {
+  rl.question('Proceed? (y,N): ', answer => {
+    if(answer === 'y') {
+      console.log('Added.');
+    }
+    else {
+      console.log('Aborted.');
+    }
+    rl.prompt();
+  });
+};
+
+const onCommand = () => console.log('WARNING: command not implemented!');
+
+const onAddChampionship = () => {
+  rl.question('Championship name: ', name => {
+    rl.question('Championship year: ', year => {
+      console.log(`Adding "${name}, ${year}"`);
+      proceedQuestion();
+    });
+  });
+};
+
+const onCommands = {
+  addChampionship: onAddChampionship,
+  addChampionshipRound: onCommand,
+  addDriver: onCommand,
+  addClass: onCommand
+};
 
 rl.prompt();
 
@@ -63,11 +92,11 @@ rl.on('line', input => {
       rl.prompt();
       break;
     default:
-      if(input in commands) {
-        commands[input](input);
+      if(commands.includes(input)) {
+        onCommands[input]();
       }
       else {
-        console.log('Unknown command');
+        console.log('WARNING: Unknown command!');
       }
       rl.prompt();
       break;
