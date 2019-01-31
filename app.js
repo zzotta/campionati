@@ -1,5 +1,6 @@
 const Sequelize = require('sequelize');
 const path = require('path');
+const readline = require('readline');
 
 const sequelize = new Sequelize(
   `sqlite:${path.join(__dirname, 'db/campionati.db')}`,
@@ -24,4 +25,37 @@ const Driver = sequelize.define('driver', {
 
 const Class = sequelize.define('class', {
   name: {type: Sequelize.STRING}
+});
+
+const completerFunction = (line) => {
+  const completions = 'exit quit'.split(' ');
+  const hits = completions.filter((c) => c.startsWith(line));
+  return [hits.length ? hits : completions, line];
+};
+
+const rl = readline.createInterface({
+  input : process.stdin ,
+  output: process.stdout,
+  completer: completerFunction
+});
+
+rl.setPrompt('championships$ ');
+
+rl.prompt();
+
+rl.on('line', input => {
+  switch(input)
+  {
+    case 'exit':
+      console.log('ciao');
+      rl.close();
+      break;
+    case '':
+      rl.prompt();
+      break;
+    default:
+      console.log(input);
+      rl.prompt();
+      break;
+  }
 });
