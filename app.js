@@ -27,8 +27,18 @@ const Class = sequelize.define('class', {
   name: {type: Sequelize.STRING}
 });
 
+
+const onCommand = input => console.log(input);
+
+const commands = {
+  addChampionship: onCommand,
+  addChampionshipRound: onCommand,
+  addDriver: onCommand,
+  addClass: onCommand
+};
+
 const completerFunction = (line) => {
-  const completions = 'exit quit'.split(' ');
+  const completions = Object.keys(commands);
   const hits = completions.filter((c) => c.startsWith(line));
   return [hits.length ? hits : completions, line];
 };
@@ -47,14 +57,18 @@ rl.on('line', input => {
   switch(input)
   {
     case 'exit':
-      console.log('ciao');
       rl.close();
       break;
     case '':
       rl.prompt();
       break;
     default:
-      console.log(input);
+      if(input in commands) {
+        commands[input](input);
+      }
+      else {
+        console.log('Unknown command');
+      }
       rl.prompt();
       break;
   }
