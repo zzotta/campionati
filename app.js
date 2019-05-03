@@ -9,8 +9,8 @@ const sequelize = new Sequelize(
 
 
 const Championship = sequelize.define('championship', {
-  name: {type: Sequelize.STRING },
-  year: {type: Sequelize.INTEGER}
+  name: {type: Sequelize.STRING,  unique: 'uniqueIndex'},
+  year: {type: Sequelize.INTEGER, unique: 'uniqueIndex'}
 });
 
 const Round = sequelize.define('round', {
@@ -28,6 +28,7 @@ const Class = sequelize.define('class', {
   name: {type: Sequelize.STRING}
 });
 
+sequelize.sync().then(() => {
 
 const commands = [
   'addChampionship',
@@ -50,25 +51,37 @@ const rl = readline.createInterface({
 
 });
 
-const proceedQuestion = () => {
-  rl.question('Proceed? (y,N): ', answer => {
-    if(answer === 'y') {
-      console.log('Added.');
-    }
-    else {
-      console.log('Aborted.');
-    }
-    rl.prompt();
-  });
-};
 
 const onCommand = () => console.log('WARNING: command not implemented!');
 
+const insert = (row, table) => {
+  console.log(`Adding ${JSON.stringify(row)} to ${table.name}`);
+  rl.question('Proceed? (y,N): ', proceed => {
+    if(proceed === 'y') {
+      table.create(row).then(() => {
+        rl.prompt();
+      }).catch(error => {
+        console.log(`====> ERROR: ${error.name} [${error.fields}]`);
+        rl.prompt();
+      });
+    }
+    else {
+      console.log('Aborted.');
+      rl.prompt();
+    }
+  });
+};
+
+
 const onAddChampionship = () => {
-  rl.question('Championship name: ', name => {
-    rl.question('Championship year: ', year => {
-      console.log(`Adding "${name}, ${year}"`);
-      proceedQuestion();
+  let answer = {name: undefined, year: undefined};
+  let table = Championship;
+  
+  rl.question('Championship name: ', name_answer => {
+    rl.question('Championship year: ', year_answer => {
+      answer.name = name_answer;
+      answer.year = year_answer;
+      insert(answer, table);
     });
   });
 };
@@ -101,4 +114,6 @@ rl.on('line', input => {
       rl.prompt();
       break;
   }
+});
+
 });
