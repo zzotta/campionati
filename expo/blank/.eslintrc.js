@@ -40,6 +40,7 @@ module.exports = {
             'always'
         ],
         'no-console': 'warn',
-        'react/prop-types': 'warn'
+        'react/prop-types': 'warn',
+        'react/display-name': 'off'
     }
 };
