@@ -14,12 +14,15 @@ export default class HomeScreen extends React.Component {
   };
 
   render() {
+    const { navigation } = this.props;
+    const itemId = navigation.getParam('parametro_di_test', 'NO-ID');
+
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
           <View style={styles.helpContainer}>
             <TouchableOpacity style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>Qui verranno inserite le schede di gara 03</Text>
+              <Text style={styles.helpLinkText}>{JSON.stringify(itemId)}</Text>
             </TouchableOpacity>
           </View>
         </ScrollView>
