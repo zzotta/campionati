@@ -15,16 +15,27 @@ export default class HomeScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const itemId = navigation.getParam('parametro_di_test', 'NO-ID');
+    const results = navigation.getParam('results', 'NO-ID');
+    const resultElements = results.map((r) => {
+      const component = (
+        <View key={r.name} style={styles.helpContainer}>
+          <TouchableOpacity style={styles.helpLink}>
+            <Text style={styles.helpLinkText}>{JSON.stringify(r.name)}</Text>
+            <View style={styles.helpContainer}>
+              <Text style={styles.helpLinkText}>{JSON.stringify(r.penalties)}</Text>
+              <Text style={styles.helpLinkText}>{JSON.stringify(r.winch)}</Text>
+              <Text style={styles.helpLinkText}>{JSON.stringify(r.time)}</Text>
+            </View>
+          </TouchableOpacity>
+        </View>
+      );
+      return component;
+    });
 
     return (
       <View style={styles.container}>
         <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          <View style={styles.helpContainer}>
-            <TouchableOpacity style={styles.helpLink}>
-              <Text style={styles.helpLinkText}>{JSON.stringify(itemId)}</Text>
-            </TouchableOpacity>
-          </View>
+          {resultElements}
         </ScrollView>
 
         <View style={styles.tabBarInfoContainer}>
