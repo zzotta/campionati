@@ -2,7 +2,6 @@ import React from 'react';
 import {
   ScrollView,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from 'react-native';
@@ -31,11 +30,11 @@ export default class HomeScreen extends React.Component {
           {resultElements}
         </ScrollView>
 
-        <View style={styles.plusContainer}>
+        {/* <View style={styles.plusContainer}>
           <TouchableOpacity>
             <Text>+</Text>
           </TouchableOpacity>
-        </View>
+        </View> */}
       </View>
     );
   }

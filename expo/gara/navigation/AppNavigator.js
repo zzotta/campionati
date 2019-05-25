@@ -11,7 +11,7 @@ const data = {
       time: 312
     },
     {
-      name: 'Valerio Rumagnoli',
+      name: 'Samuele Comparato',
       penalties: 1,
       winch: 1,
       time: 443
@@ -23,7 +23,7 @@ const data = {
       time: 222
     },
     {
-      name: 'Ivan Menarini',
+      name: 'Silvia Comparato',
       penalties: 1,
       winch: 1,
       time: 345

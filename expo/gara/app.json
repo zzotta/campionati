@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Gara",
-    "slug": "gara",
+    "name": "Gara-20190525",
+    "slug": "gara-20190525",
     "privacy": "public",
     "sdkVersion": "32.0.0",
     "platforms": [
@@ -24,6 +24,7 @@
     ],
     "ios": {
       "supportsTablet": true
-    }
+    },
+    "description": ""
   }
 }
