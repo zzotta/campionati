@@ -1,9 +1,5 @@
 import React from 'react';
-import {
-  ScrollView,
-  StyleSheet,
-  View,
-} from 'react-native';
+import {ScrollView} from 'react-native';
 import DriverResult from '../components/DriverResult';
 
 export default class HomeScreen extends React.Component {
@@ -17,25 +13,9 @@ export default class HomeScreen extends React.Component {
     const resultElements = results.map((r) => <DriverResult key={r.name} data={r} />);
 
     return (
-      <View style={styles.container}>
-        <ScrollView style={styles.container} contentContainerStyle={styles.contentContainer}>
-          {resultElements}
-        </ScrollView>
-      </View>
+      <ScrollView contentContainerStyle={{paddingTop: 30}}>
+        {resultElements}
+      </ScrollView>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-  },
-  contentContainer: {
-    paddingTop: 30,
-  },
-  plusContainer: {
-    flex: 1,
-    backgroundColor: '#fbfbfb',
-  },
-});
