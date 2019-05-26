@@ -1,6 +1,7 @@
 import React from 'react';
-import {ScrollView} from 'react-native';
+import {ScrollView, View} from 'react-native';
 import DriverResult from '../components/DriverResult';
+import AddButton from '../components/AddButton';
 
 export default class HomeScreen extends React.Component {
   static navigationOptions = {
@@ -13,9 +14,12 @@ export default class HomeScreen extends React.Component {
     const resultElements = results.map((r) => <DriverResult key={r.name} data={r} />);
 
     return (
-      <ScrollView contentContainerStyle={{paddingTop: 30}}>
-        {resultElements}
-      </ScrollView>
+      <View>
+        <ScrollView contentContainerStyle={{paddingTop: 30}}>
+          {resultElements}
+        </ScrollView>
+        <AddButton />
+      </View>
     );
   }
 }
