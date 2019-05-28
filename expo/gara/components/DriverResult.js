@@ -3,6 +3,7 @@ import React from 'react';
 import {
   Card,
   Title,
+  List,
 } from 'react-native-paper';
 
 import DriverResultDataTable from '../components/DriverResultDataTable';
@@ -17,9 +18,13 @@ export default class DriverResult extends React.Component {
           subtitle={`${data.penalties}p   ${data.winch}w   ${data.time}s`}
           left={() => <Title>1</Title>}
         />
-        <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
         <Card.Content>
-          <DriverResultDataTable data={data} />
+          <List.Accordion title="Details">
+            <List.Item
+              title="Hidden"
+              left={() => <DriverResultDataTable data={data} /> }
+            />
+          </List.Accordion>
         </Card.Content>
       </Card>
     );
