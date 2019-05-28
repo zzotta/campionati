@@ -1,9 +1,0 @@
-{
-  "expoServerPort": 19000,
-  "expoServerNgrokUrl": "https://ub-kgx.zzotta.campionati.exp.direct",
-  "packagerNgrokUrl": "https://packager.ub-kgx.zzotta.campionati.exp.direct",
-  "ngrokPid": 7321,
-  "devToolsPort": 19002,
-  "packagerPort": 19001,
-  "packagerPid": 7275
-}
