@@ -1,6 +1,7 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
+import DriverResultInputScreen from '../screens/DriverResultInputScreen';
 
 const data = {
   ABS: [
@@ -104,11 +105,22 @@ const data = {
   Lexan: []
 };
 
-export default createAppContainer(createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    params: {
-      results: data.ABS
-    }
+export default createAppContainer(createStackNavigator(
+  {
+    Home: {
+      screen: HomeScreen,
+      params: {
+        results: data.ABS
+      }
+    },
+    Input: {
+      screen: DriverResultInputScreen,
+      params: {
+        results: data.ABS
+      }
+    },
+  },
+  {
+    initialRouteName: 'Home',
   }
-}));
+));

@@ -4,11 +4,12 @@ import { FAB } from 'react-native-paper';
 
 export default class AddButton extends React.Component {
   render() {
+    const {navigation} = this.props;
     return (
       <FAB
         style={styles.fab}
         icon="add"
-        onPress={() => {}}
+        onPress={() => {navigation.navigate('Input');}}
       />
     );
   }
