@@ -11,7 +11,7 @@ export default class HomeScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     const results = navigation.getParam('results', 'NO-ID');
-    const resultElements = results.map((r) => <DriverResult key={r.name} data={r} />);
+    const resultElements = results.map((r) => <DriverResult key={r.name} navigation={navigation} data={r} />);
 
     return (
       <View>
