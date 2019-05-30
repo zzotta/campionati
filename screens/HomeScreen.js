@@ -4,10 +4,6 @@ import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
-
   render() {
     const { navigation } = this.props;
     const results = navigation.getParam('results', 'NO-ID');
