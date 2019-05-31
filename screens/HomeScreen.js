@@ -4,21 +4,17 @@ import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
 export default class HomeScreen extends React.Component {
-  static navigationOptions = {
-    header: null,
-  };
-
   render() {
     const { navigation } = this.props;
     const results = navigation.getParam('results', 'NO-ID');
-    const resultElements = results.map((r) => <DriverResult key={r.name} data={r} />);
+    const resultElements = results.map((r) => <DriverResult key={r.name} navigation={navigation} data={r} />);
 
     return (
       <View>
         <ScrollView contentContainerStyle={{paddingTop: 30}}>
           {resultElements}
         </ScrollView>
-        <AddButton />
+        <AddButton navigation={navigation} />
       </View>
     );
   }

@@ -11,8 +11,9 @@ import DriverResultDataTable from '../components/DriverResultDataTable';
 export default class DriverResult extends React.Component {
   render() {
     const {data} = this.props;
+    const {navigation} = this.props;
     return (
-      <Card>
+      <Card onLongPress={() => navigation.navigate('Input')}>
         <Card.Title
           title={data.name}
           subtitle={`${data.penalties}p   ${data.winch}w   ${data.time}s`}

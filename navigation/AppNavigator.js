@@ -1,6 +1,7 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
+import DriverResultInputScreen from '../screens/DriverResultInputScreen';
 
 const data = {
   ABS: [
@@ -101,14 +102,125 @@ const data = {
       time: 145
     }
   ],
-  Lexan: []
+  Lexan: [
+    {
+      name: 'Marco Comparatol',
+      penalties: 3,
+      winch: 5,
+      time: 312
+    },
+    {
+      name: 'Samuele Comparatol',
+      penalties: 1,
+      winch: 1,
+      time: 443
+    },
+    {
+      name: 'Massimo Arcaral',
+      penalties: 4,
+      winch: 1,
+      time: 222
+    },
+    {
+      name: 'Silvia Comparatol',
+      penalties: 1,
+      winch: 1,
+      time: 345
+    },
+    {
+      name: 'Gabriele Cieril',
+      penalties: 1,
+      winch: 0,
+      time: 123
+    },
+    {
+      name: 'Daniele Agrestinil',
+      penalties: 1,
+      winch: 1,
+      time: 133
+    },
+    {
+      name: 'Paolo Rossil',
+      penalties: 3,
+      winch: 0,
+      time: 221
+    },
+    {
+      name: 'Gianluca Russol',
+      penalties: 1,
+      winch: 1,
+      time: 145
+    },
+    {
+      name: 'Marco Comparato2l',
+      penalties: 3,
+      winch: 5,
+      time: 312
+    },
+    {
+      name: 'Valerio Rumagnoli2l',
+      penalties: 1,
+      winch: 1,
+      time: 443
+    },
+    {
+      name: 'Massimo Arcara2l',
+      penalties: 4,
+      winch: 1,
+      time: 222
+    },
+    {
+      name: 'Ivan Menarini2l',
+      penalties: 1,
+      winch: 1,
+      time: 345
+    },
+    {
+      name: 'Gabriele Cieri2l',
+      penalties: 1,
+      winch: 0,
+      time: 123
+    },
+    {
+      name: 'Daniele Agrestini2l',
+      penalties: 1,
+      winch: 1,
+      time: 133
+    },
+    {
+      name: 'Paolo Rossi2l',
+      penalties: 3,
+      winch: 0,
+      time: 221
+    },
+    {
+      name: 'Gianluca Russo2l',
+      penalties: 1,
+      winch: 1,
+      time: 145
+    }
+  ],
 };
 
-export default createAppContainer(createStackNavigator({
-  Home: {
-    screen: HomeScreen,
-    params: {
-      results: data.ABS
-    }
+export default createAppContainer(createStackNavigator(
+  {
+    ABS: {
+      screen: HomeScreen,
+      params: {
+        results: data.ABS
+      }
+    },
+    Lexan: {
+      screen: HomeScreen,
+      params: {
+        results: data.Lexan
+      }
+    },
+    Input: {
+      screen: DriverResultInputScreen,
+    },
+  },
+  {
+    initialRouteName: 'ABS',
   }
-}));
+));
