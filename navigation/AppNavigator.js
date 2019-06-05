@@ -1,4 +1,4 @@
-import { createAppContainer, createStackNavigator } from 'react-navigation';
+import { createAppContainer, createDrawerNavigator, createStackNavigator } from 'react-navigation';
 
 import HomeScreen from '../screens/HomeScreen';
 import DriverResultInputScreen from '../screens/DriverResultInputScreen';
@@ -202,7 +202,7 @@ const data = {
   ],
 };
 
-export default createAppContainer(createStackNavigator(
+const StackNavigator = createStackNavigator(
   {
     ABS: {
       screen: HomeScreen,
@@ -223,4 +223,13 @@ export default createAppContainer(createStackNavigator(
   {
     initialRouteName: 'ABS',
   }
+);
+
+export default createAppContainer(createDrawerNavigator(
+  { Home: { screen: StackNavigator } },
+  // {
+  //   contentComponent: () => (
+  //     <DrawerItems toggleTheme={() => DarkTheme} isDarkTheme />
+  //   ),
+  // }
 ));
