@@ -11,7 +11,7 @@ export default class HomeScreen extends React.Component {
 
     return (
       <View>
-        <ScrollView contentContainerStyle={{paddingTop: 30}}>
+        <ScrollView>
           {resultElements}
         </ScrollView>
         <AddButton navigation={navigation} />

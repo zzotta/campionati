@@ -13,7 +13,7 @@ export default class DriverResult extends React.Component {
     const {data} = this.props;
     const {navigation} = this.props;
     return (
-      <Card onLongPress={() => navigation.navigate('Input')}>
+      <Card onLongPress={() => navigation.navigate('Input', data)}>
         <Card.Title
           title={data.name}
           subtitle={`${data.penalties}p   ${data.winch}w   ${data.time}s`}

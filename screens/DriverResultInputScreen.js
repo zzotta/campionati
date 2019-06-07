@@ -10,6 +10,12 @@ export default class DriverResultInputScreen extends React.Component {
     time: '',
   };
 
+  componentDidMount() {
+    const { navigation } = this.props;
+    const driverName = navigation.getParam('name', '');
+    this.setState({name: driverName});
+  }
+
   render() {
     return (
       <View>
