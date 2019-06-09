@@ -1,6 +1,6 @@
 import { createAppContainer, createStackNavigator } from 'react-navigation';
 
-import HomeScreen from '../screens/HomeScreen';
+import ResultsScreen from '../screens/ResultsScreen';
 import DriverResultInputScreen from '../screens/DriverResultInputScreen';
 
 const data = {
@@ -205,13 +205,13 @@ const data = {
 export default createAppContainer(createStackNavigator(
   {
     ABS: {
-      screen: HomeScreen,
+      screen: ResultsScreen,
       params: {
         results: data.ABS
       }
     },
     Lexan: {
-      screen: HomeScreen,
+      screen: ResultsScreen,
       params: {
         results: data.Lexan
       }

@@ -3,7 +3,7 @@ import {ScrollView, View} from 'react-native';
 import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
-export default class HomeScreen extends React.Component {
+export default class ResultsScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     const results = navigation.getParam('results', 'NO-ID');
