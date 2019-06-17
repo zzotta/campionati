@@ -81,7 +81,7 @@ const data = {
       name: 'Gabriele Cieri2',
       penalties: 1,
       winch: 0,
-      time: 123
+      time: 12
     },
     {
       name: 'Daniele Agrestini2',
@@ -202,6 +202,20 @@ const data = {
   ],
 };
 
+const compareResults = (a, b) => {
+  let res = a.penalties - b.penalties;
+  
+  if(!res) {
+    res = a.winch - b.winch;
+  }
+
+  if(!res) {
+    res = a.time - b.time;
+  }
+
+  return res;
+};
+
 export default class ResultsScreen extends React.Component {
   constructor(props) {
     super(props);
@@ -215,7 +229,9 @@ export default class ResultsScreen extends React.Component {
 
   render() {
     const { navigation } = this.props;
-    const resultElements = this.state.results.map((r) => <DriverResult key={r.name} navigation={navigation} data={r} />);
+    const results = [...this.state.results];
+    results.sort(compareResults);
+    const resultElements = results.map((r) => <DriverResult key={r.name} navigation={navigation} data={r} />);
 
     return (
       <View>
