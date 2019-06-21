@@ -231,7 +231,9 @@ export default class ResultsScreen extends React.Component {
     const { navigation } = this.props;
     const results = [...this.state.results];
     results.sort(compareResults);
-    const resultElements = results.map((r) => <DriverResult key={r.name} navigation={navigation} data={r} />);
+    const resultElements = results.map((r, position) => 
+      <DriverResult key={r.name} navigation={navigation} position={position + 1} data={r} />
+    );
 
     return (
       <View>
