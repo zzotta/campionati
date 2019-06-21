@@ -2,7 +2,7 @@ import React from 'react';
 
 import {
   Card,
-  Title,
+  Avatar,
 //  List,
 } from 'react-native-paper';
 
@@ -18,7 +18,7 @@ export default class DriverResult extends React.Component {
         <Card.Title
           title={data.name}
           subtitle={`${data.penalties}p   ${data.winch}w   ${data.time}s`}
-          left={() => <Title>{position}</Title>}
+          left={() => <Avatar.Text size={48} label={position} />}
         />
       </Card>
     );
