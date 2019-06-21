@@ -4,202 +4,172 @@ import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
 const data = {
-  ABS: [
-    {
+  ABS: {
+    'marco_comparato': {
       name: 'Marco Comparato',
       penalties: 3,
       winch: 5,
       time: 312
     },
-    {
+    'samuele_comparato': {
       name: 'Samuele Comparato',
       penalties: 1,
       winch: 1,
       time: 443
     },
-    {
+    'massimo_arcara': {
       name: 'Massimo Arcara',
       penalties: 4,
       winch: 1,
       time: 222
     },
-    {
+    'silvia_comparato': {
       name: 'Silvia Comparato',
       penalties: 1,
       winch: 1,
       time: 345
     },
-    {
+    'gabriele_cieri': {
       name: 'Gabriele Cieri',
       penalties: 1,
       winch: 0,
       time: 123
     },
-    {
+    'daniele_agrestini': {
       name: 'Daniele Agrestini',
       penalties: 1,
       winch: 1,
       time: 133
     },
-    {
+    'paolo_rossi': {
       name: 'Paolo Rossi',
       penalties: 3,
       winch: 0,
       time: 221
     },
-    {
+    'gianluca_russo': {
       name: 'Gianluca Russo',
       penalties: 1,
       winch: 1,
       time: 145
     },
-    {
-      name: 'Marco Comparato2',
+    'alessandro_comparato': {
+      name: 'Alessandro Comparato',
       penalties: 3,
       winch: 5,
       time: 312
     },
-    {
-      name: 'Valerio Rumagnoli2',
+    'valerio_ottaviani': {
+      name: 'Valerio Ottaviani',
       penalties: 1,
       winch: 1,
       time: 443
     },
-    {
-      name: 'Massimo Arcara2',
+    'massimo_noe': {
+      name: 'Massimo Noe',
       penalties: 4,
       winch: 1,
       time: 222
     },
-    {
-      name: 'Ivan Menarini2',
+    'ivan_terrina': {
+      name: 'Ivan Terrina',
       penalties: 1,
       winch: 1,
       time: 345
     },
-    {
-      name: 'Gabriele Cieri2',
+    'gabriele_cerrotti': {
+      name: 'Gabriele Cerrotti',
       penalties: 1,
       winch: 0,
       time: 12
     },
-    {
-      name: 'Daniele Agrestini2',
+    'daniele_bosco': {
+      name: 'Daniele Bosco',
       penalties: 1,
       winch: 1,
       time: 133
     },
-    {
-      name: 'Paolo Rossi2',
+    'paolo_verdi': {
+      name: 'Paolo Verdi',
       penalties: 3,
       winch: 0,
       time: 221
     },
-    {
-      name: 'Gianluca Russo2',
+    'gianluca_torre': {
+      name: 'Gianluca Torre',
       penalties: 1,
       winch: 1,
       time: 145
     }
-  ],
-  Lexan: [
-    {
-      name: 'Marco Comparatol',
+  },
+  Lexan: {
+    'marco_comparato': {
+      name: 'Marco Comparato',
       penalties: 3,
       winch: 5,
       time: 312
     },
-    {
-      name: 'Samuele Comparatol',
+    'samuele_comparato': {
+      name: 'Samuele Comparato',
       penalties: 1,
       winch: 1,
       time: 443
     },
-    {
-      name: 'Massimo Arcaral',
+    'massimo_arcara': {
+      name: 'Massimo Arcara',
       penalties: 4,
       winch: 1,
       time: 222
     },
-    {
-      name: 'Silvia Comparatol',
+    'silvia_comparato': {
+      name: 'Silvia Comparato',
       penalties: 1,
       winch: 1,
       time: 345
     },
-    {
-      name: 'Gabriele Cieril',
+    'gabriele_cieri': {
+      name: 'Gabriele Cieri',
       penalties: 1,
       winch: 0,
       time: 123
     },
-    {
-      name: 'Daniele Agrestinil',
+    'daniele_agrestini': {
+      name: 'Daniele Agrestini',
       penalties: 1,
       winch: 1,
       time: 133
     },
-    {
-      name: 'Paolo Rossil',
+    'paolo_rossi': {
+      name: 'Paolo Rossi',
       penalties: 3,
       winch: 0,
       time: 221
     },
-    {
-      name: 'Gianluca Russol',
+    'gianluca_russo': {
+      name: 'Gianluca Russo',
       penalties: 1,
       winch: 1,
       time: 145
     },
-    {
-      name: 'Marco Comparato2l',
+    'alessandro_comparato': {
+      name: 'Alessandro Comparato',
       penalties: 3,
       winch: 5,
       time: 312
     },
-    {
-      name: 'Valerio Rumagnoli2l',
+    'valerio_ottaviani': {
+      name: 'Valerio Ottaviani',
       penalties: 1,
       winch: 1,
       time: 443
     },
-    {
-      name: 'Massimo Arcara2l',
-      penalties: 4,
-      winch: 1,
-      time: 222
-    },
-    {
-      name: 'Ivan Menarini2l',
-      penalties: 1,
-      winch: 1,
-      time: 345
-    },
-    {
-      name: 'Gabriele Cieri2l',
-      penalties: 1,
+    'massimo_noe': {
+      name: 'Massimo Noe',
+      penalties: 0,
       winch: 0,
-      time: 123
+      time: 99
     },
-    {
-      name: 'Daniele Agrestini2l',
-      penalties: 1,
-      winch: 1,
-      time: 133
-    },
-    {
-      name: 'Paolo Rossi2l',
-      penalties: 3,
-      winch: 0,
-      time: 221
-    },
-    {
-      name: 'Gianluca Russo2l',
-      penalties: 1,
-      winch: 1,
-      time: 145
-    }
-  ],
+  },
 };
 
 const compareResults = (a, b) => {
@@ -219,17 +189,36 @@ const compareResults = (a, b) => {
 export default class ResultsScreen extends React.Component {
   constructor(props) {
     super(props);
-    this.state = {results: []};
+    this.state = {
+      group: 'ABS',
+      results: [],
+    };
     const { navigation } = this.props;
     const group = navigation.getParam('group', '');
     if(group) {
-      this.state = {results: data[group]};
+      this.state = {
+        group: group,
+        results: data[group],
+      };
     }
+
+    this.updateDriverResult = this.updateDriverResult.bind(this);
+  }
+
+  updateDriverResult() {
+  //   this.setState(
+  //     {
+  //       results
+  //     }
+  //   );
   }
 
   render() {
     const { navigation } = this.props;
-    const results = [...this.state.results];
+    const results = [];
+    for(let driver_id in this.state.results) {
+      results.push(this.state.results[driver_id]);
+    }
     results.sort(compareResults);
     const resultElements = results.map((r, position) => 
       <DriverResult key={r.name} navigation={navigation} position={position + 1} data={r} />
