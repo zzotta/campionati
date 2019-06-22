@@ -11,8 +11,8 @@ import {
 export default class DriverResult extends React.Component {
   render() {
     const {data} = this.props;
-    const {resultModifier} = this.props;
-    const navigationData = Object.assign({}, data, {resultModifier: resultModifier});
+    const {updateDriverResult} = this.props;
+    const navigationData = Object.assign({}, data, {updateDriverResult: updateDriverResult});
     const {position} = this.props;
     const {navigation} = this.props;
     return (

@@ -1,8 +1,19 @@
 import React from 'react';
 import {View} from 'react-native';
-import {TextInput} from 'react-native-paper';
+import { TextInput, Appbar } from 'react-native-paper';
+
 
 export default class DriverResultInputScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      header: (
+        <Appbar.Header>
+          <Appbar.BackAction onPress={() => navigation.goBack()} />
+        </Appbar.Header>
+      )
+    };
+  };
+
   constructor(props) {
     super(props);
     const { navigation } = this.props;
@@ -12,11 +23,11 @@ export default class DriverResultInputScreen extends React.Component {
       winch: navigation.getParam('winch', '').toString(),
       time: navigation.getParam('time', '').toString(),
     };
+
+    this.updateDriverResult = this.props.navigation.updateDriverResult;
   }
 
   render() {
-    const { resultModifier } = this.props.navigation;
-
     return (
       <View>
         <TextInput

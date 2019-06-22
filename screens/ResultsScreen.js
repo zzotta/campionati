@@ -187,6 +187,12 @@ const compareResults = (a, b) => {
 };
 
 export default class ResultsScreen extends React.Component {
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('group', 'Unknown Group'),
+    };
+  };
+
   constructor(props) {
     super(props);
     this.state = {
@@ -231,7 +237,7 @@ export default class ResultsScreen extends React.Component {
         navigation={navigation}
         position={position + 1}
         data={r}
-        resultModifier={this.updateDriverResult}
+        updateDriverResult={this.updateDriverResult}
       />
     );
 
