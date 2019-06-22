@@ -3,25 +3,15 @@ import {View} from 'react-native';
 import {TextInput} from 'react-native-paper';
 
 export default class DriverResultInputScreen extends React.Component {
-  state = {
-    name: '',
-    penalties: '',
-    winch: '',
-    time: '',
-  };
-
-  componentDidMount() {
+  constructor(props) {
+    super(props);
     const { navigation } = this.props;
-    const driverName = navigation.getParam('name', '').toString();
-    const driverPenalties = navigation.getParam('penalties', '').toString();
-    const driverWinch = navigation.getParam('winch', '').toString();
-    const driverTime = navigation.getParam('time', '').toString();
-    this.setState({
-      name: driverName,
-      penalties: driverPenalties,
-      winch: driverWinch,
-      time: driverTime,
-    });
+    this.state = {
+      name: navigation.getParam('name', '').toString(),
+      penalties: navigation.getParam('penalties', '').toString(),
+      winch: navigation.getParam('winch', '').toString(),
+      time: navigation.getParam('time', '').toString(),
+    };
   }
 
   render() {
