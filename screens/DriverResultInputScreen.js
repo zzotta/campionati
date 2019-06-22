@@ -25,6 +25,8 @@ export default class DriverResultInputScreen extends React.Component {
   }
 
   render() {
+    const { resultModifier } = this.props.navigation;
+
     return (
       <View>
         <TextInput

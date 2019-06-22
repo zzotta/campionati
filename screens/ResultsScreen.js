@@ -205,23 +205,34 @@ export default class ResultsScreen extends React.Component {
     this.updateDriverResult = this.updateDriverResult.bind(this);
   }
 
-  updateDriverResult() {
-  //   this.setState(
-  //     {
-  //       results
-  //     }
-  //   );
+  updateDriverResult(r) {
+    this.setState(
+      {
+        [r.id]: {
+          name: r.name,
+          penalties: r.penalties,
+          winch: r.winch,
+          time: r.time,
+        }
+      }
+    );
   }
 
   render() {
     const { navigation } = this.props;
     const results = [];
     for(let driver_id in this.state.results) {
-      results.push(this.state.results[driver_id]);
+      results.push(Object.assign({id: driver_id}, this.state.results[driver_id]));
     }
     results.sort(compareResults);
     const resultElements = results.map((r, position) => 
-      <DriverResult key={r.name} navigation={navigation} position={position + 1} data={r} />
+      <DriverResult
+        key={r.id}
+        navigation={navigation}
+        position={position + 1}
+        data={r}
+        resultModifier={this.updateDriverResult}
+      />
     );
 
     return (

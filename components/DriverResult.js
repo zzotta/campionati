@@ -11,10 +11,12 @@ import {
 export default class DriverResult extends React.Component {
   render() {
     const {data} = this.props;
+    const {resultModifier} = this.props;
+    const navigationData = Object.assign({}, data, {resultModifier: resultModifier});
     const {position} = this.props;
     const {navigation} = this.props;
     return (
-      <Card onLongPress={() => navigation.navigate('Input', data)}>
+      <Card onLongPress={() => navigation.navigate('Input', navigationData)}>
         <Card.Title
           title={data.name}
           subtitle={`${data.penalties}p   ${data.winch}w   ${data.time}s`}
