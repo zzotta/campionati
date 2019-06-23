@@ -9,6 +9,8 @@ export default class DriverResultInputScreen extends React.Component {
       header: (
         <Appbar.Header>
           <Appbar.BackAction onPress={() => navigation.goBack()} />
+          <Appbar.Content title="Update Result" />
+          <Appbar.Action icon="save" onPress={() => navigation.goBack()} />
         </Appbar.Header>
       )
     };
@@ -18,13 +20,19 @@ export default class DriverResultInputScreen extends React.Component {
     super(props);
     const { navigation } = this.props;
     this.state = {
+      id: navigation.getParam('id', '').toString(),
       name: navigation.getParam('name', '').toString(),
       penalties: navigation.getParam('penalties', '').toString(),
       winch: navigation.getParam('winch', '').toString(),
       time: navigation.getParam('time', '').toString(),
     };
 
-    this.updateDriverResult = this.props.navigation.updateDriverResult;
+    this.updateDriverResultAndBack = this.updateDriverResultAndBack.bind(this);
+  }
+
+  updateDriverResultAndBack() {
+    this.props.navigation.updateDriverResult(this.state);
+    this.props.navigation.goBack();
   }
 
   render() {
