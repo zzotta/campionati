@@ -10,7 +10,7 @@ export default class DriverResultInputScreen extends React.Component {
         <Appbar.Header>
           <Appbar.BackAction onPress={() => navigation.goBack()} />
           <Appbar.Content title="Update Result" />
-          <Appbar.Action icon="save" onPress={() => navigation.goBack()} />
+          <Appbar.Action icon="save" onPress={navigation.getParam('updateDriverResultAndBack')} />
         </Appbar.Header>
       )
     };
@@ -30,8 +30,12 @@ export default class DriverResultInputScreen extends React.Component {
     this.updateDriverResultAndBack = this.updateDriverResultAndBack.bind(this);
   }
 
+  componentDidMount() {
+    this.props.navigation.setParams({ updateDriverResultAndBack: this.updateDriverResultAndBack });    
+  }
+
   updateDriverResultAndBack() {
-    this.props.navigation.updateDriverResult(this.state);
+    this.props.navigation.getParam('updateDriverResult')(this.state);
     this.props.navigation.goBack();
   }
 

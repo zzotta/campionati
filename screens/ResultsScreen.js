@@ -3,6 +3,17 @@ import {ScrollView, View} from 'react-native';
 import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
+const data1 = {
+  ABS: {
+    'marco_comparato': {
+      name: 'Marco Comparato',
+      penalties: 3,
+      winch: 5,
+      time: 312
+    },
+  },
+}
+
 const data = {
   ABS: {
     'marco_comparato': {
@@ -212,14 +223,17 @@ export default class ResultsScreen extends React.Component {
   }
 
   updateDriverResult(r) {
+    let newResults = Object.assign({}, this.state.results);
+    newResults[r.id] = {
+      name: r.name,
+      penalties: r.penalties,
+      winch: r.winch,
+      time: r.time,
+    };
     this.setState(
       {
-        [r.id]: {
-          name: r.name,
-          penalties: r.penalties,
-          winch: r.winch,
-          time: r.time,
-        }
+        group: this.state.group,
+        results: newResults,
       }
     );
   }
