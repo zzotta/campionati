@@ -1,5 +1,5 @@
 import React from 'react';
-import {ScrollView, View} from 'react-native';
+import { ScrollView, View, StyleSheet } from 'react-native';
 import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
@@ -215,7 +215,7 @@ export default class ResultsScreen extends React.Component {
     if(group) {
       this.state = {
         group: group,
-        results: data[group],
+        results: data1[group],
       };
     }
 
@@ -256,7 +256,7 @@ export default class ResultsScreen extends React.Component {
     );
 
     return (
-      <View>
+      <View style={styles.fill}>
         <ScrollView>
           {resultElements}
         </ScrollView>
@@ -265,3 +265,9 @@ export default class ResultsScreen extends React.Component {
     );
   }
 }
+
+const styles = StyleSheet.create({
+  fill: {
+    flex: 1,
+  },
+});
