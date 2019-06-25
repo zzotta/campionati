@@ -197,6 +197,8 @@ const compareResults = (a, b) => {
   return res;
 };
 
+const generateId = name => name.trim().toLowerCase().replace(/\s\s+/g, '_');
+
 export default class ResultsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -215,7 +217,7 @@ export default class ResultsScreen extends React.Component {
     if(group) {
       this.state = {
         group: group,
-        results: data1[group],
+        results: data[group],
       };
     }
 
@@ -224,7 +226,8 @@ export default class ResultsScreen extends React.Component {
 
   updateDriverResult(r) {
     let newResults = Object.assign({}, this.state.results);
-    newResults[r.id] = {
+    const id = r.id ? r.id : generateId(r.name); 
+    newResults[id] = {
       name: r.name,
       penalties: r.penalties,
       winch: r.winch,
@@ -260,7 +263,7 @@ export default class ResultsScreen extends React.Component {
         <ScrollView>
           {resultElements}
         </ScrollView>
-        <AddButton navigation={navigation} />
+        <AddButton navigation={navigation} updateDriverResult={this.updateDriverResult} />
       </View>
     );
   }
