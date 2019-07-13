@@ -26,7 +26,7 @@ export default class ResultsScreen extends React.Component {
     const generateDriverId = name => {
       const trimmed = name.trim();
       const lowered = trimmed.toLowerCase();
-      const replaced = lowered.replace(/\s\s+/g, '_');
+      const replaced = lowered.replace(/\s+/g, '_');
 
       return replaced;
     };
