@@ -23,15 +23,11 @@ export default class ResultsScreen extends React.Component {
   }
 
   updateDriverResult(r) {
-    const generateDriverId = name => name.trim().toLowerCase().replace(/\s+/g, '_');
-    const driverId = r.id ? r.id : generateDriverId(r.name);
- 
-    const newResult = {
-      name: r.name,
-      penalties: r.penalties,
-      winch: r.winch,
-      time: r.time,
-    };
+    const driverId = r.id ? r.id : r.name.trim().toLowerCase().replace(/\s+/g, '_');
+
+    // Get a Subset of an Object
+    // https://medium.com/@captaindaylight/get-a-subset-of-an-object-9896148b9c72
+    const newResult = (({name, penalties, winch, time}) => ({name, penalties, winch, time}))(r);
 
     this.setState(
       {
