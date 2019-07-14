@@ -16,34 +16,35 @@ export default class ResultsScreen extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      results: Object.assign({ABS: {}, LEX: {},}, data),
+      results: {...data},
     };
 
     this.updateDriverResult = this.updateDriverResult.bind(this);
   }
 
   updateDriverResult(r) {
-    const generateDriverId = name => {
-      const trimmed = name.trim();
-      const lowered = trimmed.toLowerCase();
-      const replaced = lowered.replace(/\s+/g, '_');
-
-      return replaced;
-    };
-    
-    const getDriverId = result => ('id' in result && result.id) ? result.id : generateDriverId(result.name);
-
-    const newResults = {...this.state.results};
+    const generateDriverId = name => name.trim().toLowerCase().replace(/\s+/g, '_');
+    const driverId = r.id ? r.id : generateDriverId(r.name);
  
-    newResults[r.group][getDriverId(r)] = {
+    const newResult = {
       name: r.name,
       penalties: r.penalties,
       winch: r.winch,
       time: r.time,
     };
-    this.setState({
-      results: newResults,
-    });
+
+    this.setState(
+      {
+        ...this.state,
+        results: {
+          ...this.state.results,
+          [r.group]: {
+            ...this.state.results[r.group],
+            [driverId]: newResult,
+          }
+        }
+      }
+    );
   }
 
   render() {
