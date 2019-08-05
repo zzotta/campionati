@@ -19,7 +19,7 @@ export default class DriverResult extends React.Component {
       <Card onLongPress={() => navigation.navigate('Input', navigationData)}>
         <Card.Title
           title={data.name}
-          subtitle={`${data.penalties}p   ${data.winch}w   ${data.time}s`}
+          subtitle={`${data.group}   ${data.penalties}p   ${data.winch}w   ${data.time}s`}
           left={() => <Avatar.Text size={48} label={position} />}
         />
       </Card>

@@ -20,6 +20,7 @@ export default class DriverResultInputScreen extends React.Component {
     super(props);
     const { navigation } = this.props;
     this.state = {
+      group: navigation.getParam('group', '---').toString(), 
       id: navigation.getParam('id', '').toString(),
       name: navigation.getParam('name', '').toString(),
       penalties: navigation.getParam('penalties', '').toString(),
@@ -42,6 +43,12 @@ export default class DriverResultInputScreen extends React.Component {
   render() {
     return (
       <View>
+        <TextInput
+          label='Group'
+          placeholder='Insert vehicle class'
+          value={this.state.group}
+          onChangeText={text => this.setState({ group: text })}
+        />
         <TextInput
           label='Name Surname'
           placeholder='Insert name and surname'

@@ -3,240 +3,42 @@ import { ScrollView, View, StyleSheet } from 'react-native';
 import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
-const data1 = {
-  ABS: {
-    'marco_comparato': {
-      name: 'Marco Comparato',
-      penalties: 3,
-      winch: 5,
-      time: 312
-    },
-  },
-}
+import { testData01 as data } from '../data/testData01';
 
-const data = {
-  ABS: {
-    'marco_comparato': {
-      name: 'Marco Comparato',
-      penalties: 3,
-      winch: 5,
-      time: 312
-    },
-    'samuele_comparato': {
-      name: 'Samuele Comparato',
-      penalties: 1,
-      winch: 1,
-      time: 443
-    },
-    'massimo_arcara': {
-      name: 'Massimo Arcara',
-      penalties: 4,
-      winch: 1,
-      time: 222
-    },
-    'silvia_comparato': {
-      name: 'Silvia Comparato',
-      penalties: 1,
-      winch: 1,
-      time: 345
-    },
-    'gabriele_cieri': {
-      name: 'Gabriele Cieri',
-      penalties: 1,
-      winch: 0,
-      time: 123
-    },
-    'daniele_agrestini': {
-      name: 'Daniele Agrestini',
-      penalties: 1,
-      winch: 1,
-      time: 133
-    },
-    'paolo_rossi': {
-      name: 'Paolo Rossi',
-      penalties: 3,
-      winch: 0,
-      time: 221
-    },
-    'gianluca_russo': {
-      name: 'Gianluca Russo',
-      penalties: 1,
-      winch: 1,
-      time: 145
-    },
-    'alessandro_comparato': {
-      name: 'Alessandro Comparato',
-      penalties: 3,
-      winch: 5,
-      time: 312
-    },
-    'valerio_ottaviani': {
-      name: 'Valerio Ottaviani',
-      penalties: 1,
-      winch: 1,
-      time: 443
-    },
-    'massimo_noe': {
-      name: 'Massimo Noe',
-      penalties: 4,
-      winch: 1,
-      time: 222
-    },
-    'ivan_terrina': {
-      name: 'Ivan Terrina',
-      penalties: 1,
-      winch: 1,
-      time: 345
-    },
-    'gabriele_cerrotti': {
-      name: 'Gabriele Cerrotti',
-      penalties: 1,
-      winch: 0,
-      time: 12
-    },
-    'daniele_bosco': {
-      name: 'Daniele Bosco',
-      penalties: 1,
-      winch: 1,
-      time: 133
-    },
-    'paolo_verdi': {
-      name: 'Paolo Verdi',
-      penalties: 3,
-      winch: 0,
-      time: 221
-    },
-    'gianluca_torre': {
-      name: 'Gianluca Torre',
-      penalties: 1,
-      winch: 1,
-      time: 145
-    }
-  },
-  Lexan: {
-    'marco_comparato': {
-      name: 'Marco Comparato',
-      penalties: 3,
-      winch: 5,
-      time: 312
-    },
-    'samuele_comparato': {
-      name: 'Samuele Comparato',
-      penalties: 1,
-      winch: 1,
-      time: 443
-    },
-    'massimo_arcara': {
-      name: 'Massimo Arcara',
-      penalties: 4,
-      winch: 1,
-      time: 222
-    },
-    'silvia_comparato': {
-      name: 'Silvia Comparato',
-      penalties: 1,
-      winch: 1,
-      time: 345
-    },
-    'gabriele_cieri': {
-      name: 'Gabriele Cieri',
-      penalties: 1,
-      winch: 0,
-      time: 123
-    },
-    'daniele_agrestini': {
-      name: 'Daniele Agrestini',
-      penalties: 1,
-      winch: 1,
-      time: 133
-    },
-    'paolo_rossi': {
-      name: 'Paolo Rossi',
-      penalties: 3,
-      winch: 0,
-      time: 221
-    },
-    'gianluca_russo': {
-      name: 'Gianluca Russo',
-      penalties: 1,
-      winch: 1,
-      time: 145
-    },
-    'alessandro_comparato': {
-      name: 'Alessandro Comparato',
-      penalties: 3,
-      winch: 5,
-      time: 312
-    },
-    'valerio_ottaviani': {
-      name: 'Valerio Ottaviani',
-      penalties: 1,
-      winch: 1,
-      time: 443
-    },
-    'massimo_noe': {
-      name: 'Massimo Noe',
-      penalties: 0,
-      winch: 0,
-      time: 99
-    },
-  },
-};
-
-const compareResults = (a, b) => {
-  let res = a.penalties - b.penalties;
-  
-  if(!res) {
-    res = a.winch - b.winch;
-  }
-
-  if(!res) {
-    res = a.time - b.time;
-  }
-
-  return res;
-};
-
-const generateId = name => name.trim().toLowerCase().replace(/\s\s+/g, '_');
 
 export default class ResultsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      title: navigation.getParam('group', 'Unknown Group'),
+      title: navigation.getParam('title', ''),
     };
   };
 
   constructor(props) {
     super(props);
     this.state = {
-      group: 'ABS',
-      results: [],
+      results: {...data},
     };
-    const { navigation } = this.props;
-    const group = navigation.getParam('group', '');
-    if(group) {
-      this.state = {
-        group: group,
-        results: data[group],
-      };
-    }
 
     this.updateDriverResult = this.updateDriverResult.bind(this);
   }
 
   updateDriverResult(r) {
-    let newResults = Object.assign({}, this.state.results);
-    const id = r.id ? r.id : generateId(r.name); 
-    newResults[id] = {
-      name: r.name,
-      penalties: r.penalties,
-      winch: r.winch,
-      time: r.time,
-    };
+    const driverId = r.id ? r.id : r.name.trim().toLowerCase().replace(/\s+/g, '_');
+
+    // Get a Subset of an Object
+    // https://medium.com/@captaindaylight/get-a-subset-of-an-object-9896148b9c72
+    const newResult = (({name, penalties, winch, time}) => ({name, penalties, winch, time}))(r);
+
     this.setState(
       {
-        group: this.state.group,
-        results: newResults,
+        ...this.state,
+        results: {
+          ...this.state.results,
+          [r.group]: {
+            ...this.state.results[r.group],
+            [driverId]: newResult,
+          }
+        }
       }
     );
   }
@@ -244,13 +46,36 @@ export default class ResultsScreen extends React.Component {
   render() {
     const { navigation } = this.props;
     const results = [];
-    for(let driver_id in this.state.results) {
-      results.push(Object.assign({id: driver_id}, this.state.results[driver_id]));
+    for(let group in this.state.results) {
+      for(let driver_id in this.state.results[group]) {
+        results.push(Object.assign(
+          {
+            key: `${driver_id}_${group}`,
+            group,
+          },
+          this.state.results[group][driver_id])
+        );
+      }
     }
+
+    const compareResults = (a, b) => {
+      let res = a.penalties - b.penalties;
+      
+      if(!res) {
+        res = a.winch - b.winch;
+      }
+    
+      if(!res) {
+        res = a.time - b.time;
+      }
+    
+      return res;
+    };
+
     results.sort(compareResults);
     const resultElements = results.map((r, position) => 
       <DriverResult
-        key={r.id}
+        key={r.key}
         navigation={navigation}
         position={position + 1}
         data={r}
