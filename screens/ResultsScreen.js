@@ -4,6 +4,7 @@ import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
 import { testData01 as data } from '../data/testData01';
+import { createUniqueIdentifier } from '../models/models.js';
 
 
 export default class ResultsScreen extends React.Component {
@@ -23,7 +24,7 @@ export default class ResultsScreen extends React.Component {
   }
 
   updateDriverResult(r) {
-    const driverId = r.id ? r.id : r.name.trim().toLowerCase().replace(/\s+/g, '_');
+    const driverId = r.id ? r.id : createUniqueIdentifier([r.name]);
 
     // Get a Subset of an Object
     // https://medium.com/@captaindaylight/get-a-subset-of-an-object-9896148b9c72
