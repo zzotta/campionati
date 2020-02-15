@@ -6,7 +6,7 @@ import { TextInput, Appbar } from 'react-native-paper';
 export default class DriverResultInputScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
-      header: (
+      header: () => (
         <Appbar.Header>
           <Appbar.BackAction onPress={() => navigation.goBack()} />
           <Appbar.Content title="Update Result" />
