@@ -11,7 +11,7 @@ export default class AddButton extends React.Component {
     return (
       <FAB
         style={styles.fab}
-        icon="add"
+        icon="plus"
         onPress={() => {navigation.navigate('Input', navigationData);}}
       />
     );

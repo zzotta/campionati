@@ -10,7 +10,7 @@ export default class DriverResultInputScreen extends React.Component {
         <Appbar.Header>
           <Appbar.BackAction onPress={() => navigation.goBack()} />
           <Appbar.Content title="Update Result" />
-          <Appbar.Action icon="save" onPress={navigation.getParam('updateDriverResultAndBack')} />
+          <Appbar.Action icon="content-save" onPress={navigation.getParam('updateDriverResultAndBack')} />
         </Appbar.Header>
       )
     };
