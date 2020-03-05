@@ -7,6 +7,20 @@ import { testData01 as data } from '../data/testData01';
 import * as FileSystem from 'expo-file-system';
 import { createUniqueIdentifier } from '../models/models.js';
 
+const dataDirectoryURI = FileSystem.documentDirectory + 'removeme/';
+const dataFileURI = dataDirectoryURI + 'data.json';
+
+const writeDataAsync = async () => {
+  await FileSystem.makeDirectoryAsync(dataDirectoryURI);
+  await FileSystem.writeAsStringAsync(dataFileURI, JSON.stringify(data));
+};
+
+const readDataAsync = async () => {
+  //const dataString = await FileSystem.readAsStringAsync(dataFileURI);
+  const dataString = await FileSystem.readDirectoryAsync(dataDirectoryURI);
+  //return JSON.parse(dataString);
+  return dataString;
+};
 
 export default class ResultsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
@@ -17,12 +31,34 @@ export default class ResultsScreen extends React.Component {
 
   constructor(props) {
     super(props);
+
     this.state = {
-      results: {...data},
+      //results: {...data},
+      results: {},
     };
 
     this.updateDriverResult = this.updateDriverResult.bind(this);
   }
+
+  componentDidMount() {
+    const dataFromFile = readDataAsync(dataFileURI);
+    this.setState({
+      results: {/*dataFromFile},*/
+        ABS: {
+          'marco_comparato': {
+            name: dataFromFile[0],
+            penalties: 3,
+            winch: 5,
+            time: 312
+          },
+        },
+      },    
+    });
+  }
+
+  // componentWillUnmount() {
+  //   writeDataAsync(data);
+  // }
 
   updateDriverResult(r) {
     const driverId = r.id ? r.id : createUniqueIdentifier([r.name]);
