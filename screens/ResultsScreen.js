@@ -29,27 +29,13 @@ export default class ResultsScreen extends React.Component {
       if(exists) {
         const dataString = await FileSystem.readAsStringAsync(dataFileURI);
         const dataFromFile = JSON.parse(dataString);
-        this.setState({
-          results: {...dataFromFile},
-        });
+        this.setState({results: {...dataFromFile}});
       } else {
         this.setState({results: {}});
       }
     };
     
     readDataAsync(dataFileURI);
-  }
-
-  componentWillUnmount() {
-    const writeDataAsync = async () => {
-      const { exists } = await FileSystem.getInfoAsync(dataDirectoryURI);
-      if(!exists) {
-        await FileSystem.makeDirectoryAsync(dataDirectoryURI);
-      }
-      await FileSystem.writeAsStringAsync(dataFileURI, JSON.stringify(data));
-    };
-    
-    writeDataAsync();    
   }
 
   updateDriverResult(r) {
@@ -71,6 +57,16 @@ export default class ResultsScreen extends React.Component {
         }
       }
     );
+
+    const writeDataAsync = async () => {
+      const { exists } = await FileSystem.getInfoAsync(dataDirectoryURI);
+      if(!exists) {
+        await FileSystem.makeDirectoryAsync(dataDirectoryURI);
+      }
+      await FileSystem.writeAsStringAsync(dataFileURI, JSON.stringify(this.state.results));
+    };
+    
+    writeDataAsync();
   }
 
   render() {
