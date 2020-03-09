@@ -10,12 +10,6 @@ import { createUniqueIdentifier } from '../models/models.js';
 const dataDirectoryURI = FileSystem.cacheDirectory + 'removeme/';
 const dataFileURI = dataDirectoryURI + 'data.json';
 
-const writeDataAsync = async () => {
-  //await FileSystem.makeDirectoryAsync(dataDirectoryURI);
-  await FileSystem.writeAsStringAsync(dataFileURI, JSON.stringify(data));
-};
-
-
 export default class ResultsScreen extends React.Component {
   static navigationOptions = ({ navigation }) => {
     return {
@@ -25,25 +19,37 @@ export default class ResultsScreen extends React.Component {
 
   constructor(props) {
     super(props);
-
-    this.state = {
-      //results: {...data},
-      results: {},
-    };
-
+    this.state = {results: {}};
     this.updateDriverResult = this.updateDriverResult.bind(this);
   }
 
   componentDidMount() {
     const readDataAsync = async () => {
-      const dataString = await FileSystem.readAsStringAsync(dataFileURI);
-      const dataFromFile = JSON.parse(dataString);
-      this.setState({
-        results: {...dataFromFile},
-      });
+      const { exists } = await FileSystem.getInfoAsync(dataFileURI);
+      if(exists) {
+        const dataString = await FileSystem.readAsStringAsync(dataFileURI);
+        const dataFromFile = JSON.parse(dataString);
+        this.setState({
+          results: {...dataFromFile},
+        });
+      } else {
+        this.setState({results: {}});
+      }
     };
     
     readDataAsync(dataFileURI);
+  }
+
+  componentWillUnmount() {
+    const writeDataAsync = async () => {
+      const { exists } = await FileSystem.getInfoAsync(dataDirectoryURI);
+      if(!exists) {
+        await FileSystem.makeDirectoryAsync(dataDirectoryURI);
+      }
+      await FileSystem.writeAsStringAsync(dataFileURI, JSON.stringify(data));
+    };
+    
+    writeDataAsync();    
   }
 
   updateDriverResult(r) {
