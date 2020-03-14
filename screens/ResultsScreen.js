@@ -3,7 +3,7 @@ import { ScrollView, View, StyleSheet } from 'react-native';
 import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
 
-import { testData01 as data } from '../data/testData01';
+//import { testData01 as data } from '../data/testData01';
 import * as FileSystem from 'expo-file-system';
 import { createUniqueIdentifier } from '../models/models.js';
 
@@ -23,19 +23,29 @@ export default class ResultsScreen extends React.Component {
     this.updateDriverResult = this.updateDriverResult.bind(this);
   }
 
+  async readDataAsync() {
+    const { exists } = await FileSystem.getInfoAsync(dataFileURI);
+    if(exists) {
+      const dataString = await FileSystem.readAsStringAsync(dataFileURI);
+      const dataFromFile = JSON.parse(dataString);
+      this.setState({results: {...dataFromFile}});
+    }
+  }
+
+  async writeDataAsync() {
+    const { exists } = await FileSystem.getInfoAsync(dataDirectoryURI);
+    if(!exists) {
+      await FileSystem.makeDirectoryAsync(dataDirectoryURI);
+    }
+    await FileSystem.writeAsStringAsync(dataFileURI, JSON.stringify(this.state.results));
+  }
+
   componentDidMount() {
-    const readDataAsync = async () => {
-      const { exists } = await FileSystem.getInfoAsync(dataFileURI);
-      if(exists) {
-        const dataString = await FileSystem.readAsStringAsync(dataFileURI);
-        const dataFromFile = JSON.parse(dataString);
-        this.setState({results: {...dataFromFile}});
-      } else {
-        this.setState({results: {}});
-      }
-    };
-    
-    readDataAsync(dataFileURI);
+    this.readDataAsync();
+  }
+
+  componentDidUpdate() {
+    this.writeDataAsync();
   }
 
   updateDriverResult(r) {
@@ -45,28 +55,18 @@ export default class ResultsScreen extends React.Component {
     // https://medium.com/@captaindaylight/get-a-subset-of-an-object-9896148b9c72
     const newResult = (({name, penalties, winch, time}) => ({name, penalties, winch, time}))(r);
 
-    this.setState(
-      {
-        ...this.state,
+    this.setState((state) => {
+      return {
+        ...state,
         results: {
-          ...this.state.results,
+          ...state.results,
           [r.group]: {
-            ...this.state.results[r.group],
+            ...state.results[r.group],
             [driverId]: newResult,
           }
         }
-      }
-    );
-
-    const writeDataAsync = async () => {
-      const { exists } = await FileSystem.getInfoAsync(dataDirectoryURI);
-      if(!exists) {
-        await FileSystem.makeDirectoryAsync(dataDirectoryURI);
-      }
-      await FileSystem.writeAsStringAsync(dataFileURI, JSON.stringify(this.state.results));
-    };
-    
-    writeDataAsync();
+      };
+    });
   }
 
   render() {
