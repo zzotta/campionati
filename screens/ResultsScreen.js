@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState , useEffect } from 'react';
 import { ScrollView, View, StyleSheet } from 'react-native';
 import DriverResult from '../components/DriverResult';
 import AddButton from '../components/AddButton';
@@ -12,6 +12,19 @@ const dataFileURI = dataDirectoryURI + 'data.json';
 
 export default function ResultsScreen(props) {
   const [resultsState, setResultsState] = useState({results: {...data}});
+
+  const readDataAsync = async () => {
+    const { exists } = await FileSystem.getInfoAsync(dataFileURI);
+    if(exists) {
+      const dataString = await FileSystem.readAsStringAsync(dataFileURI);
+      const dataFromFile = JSON.parse(dataString);
+      setResultsState({results: {...dataFromFile}});
+    }
+  };
+
+  useEffect(() => {
+    readDataAsync();
+  });
 
   const { navigation } = props;
 
