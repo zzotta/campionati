@@ -31,11 +31,11 @@ export default function ResultsScreen(props) {
   };
 
   useEffect(() => {
-    readDataAsync();
+    //readDataAsync();
   }, []);
 
   useEffect(() => {
-    writeDataAsync();
+    //writeDataAsync();
   });
 
   const { navigation } = props;
@@ -75,6 +75,8 @@ export default function ResultsScreen(props) {
     // Get a Subset of an Object
     // https://medium.com/@captaindaylight/get-a-subset-of-an-object-9896148b9c72
     const newResult = (({name, penalties, winch, time}) => ({name, penalties, winch, time}))(r);
+
+    //console.log(newResult);
   
     setResultsState({
       ...resultsState,
