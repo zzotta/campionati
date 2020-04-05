@@ -2,20 +2,18 @@ import React from 'react';
 import { StyleSheet } from 'react-native';
 import { FAB } from 'react-native-paper';
 
-export default class AddButton extends React.Component {
-  render() {
-    const {navigation} = this.props;
-    const {updateDriverResult} = this.props;
-    const navigationData = {updateDriverResult: updateDriverResult};
+export default function AddButton(props) {
+  const { navigation } = props;
+  const { updateDriverResult } = props;
+  const navigationData = {updateDriverResult: updateDriverResult};
 
-    return (
-      <FAB
-        style={styles.fab}
-        icon="plus"
-        onPress={() => {navigation.navigate('Input', navigationData);}}
-      />
-    );
-  }
+  return (
+    <FAB
+      style={styles.fab}
+      icon="plus"
+      onPress={() => {navigation.navigate('Input', navigationData);}}
+    />
+  );
 }
 
 const styles = StyleSheet.create({
