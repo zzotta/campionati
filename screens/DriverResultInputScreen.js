@@ -15,8 +15,7 @@ export default function DriverResultInputScreen(props) {
   const [time     , setTime     ] = useState(navigation.getParam('time', '').toString());
 
   const updateDriverResultAndBack = () => {
-    //bindind issues?
-    console.log(group);
+    //console.log(group);
 
     navigation.getParam('updateDriverResult')({
       group: group,
