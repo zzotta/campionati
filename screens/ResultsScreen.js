@@ -10,7 +10,7 @@ import { createUniqueIdentifier } from '../models/models.js';
 const dataDirectoryURI = FileSystem.cacheDirectory + 'removeme/';
 const dataFileURI = dataDirectoryURI + 'data.json';
 
-export default function ResultsScreen(props) {
+export default function ResultsScreen({ navigation }) {
   const [resultsState, setResultsState] = useState({results: {}});
 
   const readDataAsync = async () => {
@@ -37,8 +37,6 @@ export default function ResultsScreen(props) {
   useEffect(() => {
     writeDataAsync();
   });
-
-  const { navigation } = props;
 
   const results = [];
   for(let group in resultsState.results) {
@@ -107,12 +105,6 @@ export default function ResultsScreen(props) {
     </View>
   );
 }
-
-ResultsScreen.navigationOptions = ({ navigation }) => {
-  return {
-    title: navigation.getParam('title', ''),
-  };
-};
 
 const styles = StyleSheet.create({
   fill: {

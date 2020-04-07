@@ -1,42 +1,30 @@
 import React from 'react';
 import {View} from 'react-native';
-import { TextInput, Appbar } from 'react-native-paper';
+import { TextInput } from 'react-native-paper';
 
 
 export default class DriverResultInputScreen extends React.Component {
-  static navigationOptions = ({ navigation }) => {
-    return {
-      header: () => (
-        <Appbar.Header>
-          <Appbar.BackAction onPress={() => navigation.goBack()} />
-          <Appbar.Content title="Update Result" />
-          <Appbar.Action icon="content-save" onPress={navigation.getParam('updateDriverResultAndBack')} />
-        </Appbar.Header>
-      )
-    };
-  };
-
   constructor(props) {
     super(props);
-    const { navigation } = this.props;
+    const { route } = this.props;
     this.state = {
-      group: navigation.getParam('group', '---').toString(), 
-      id: navigation.getParam('id', '').toString(),
-      name: navigation.getParam('name', '').toString(),
-      penalties: navigation.getParam('penalties', '').toString(),
-      winch: navigation.getParam('winch', '').toString(),
-      time: navigation.getParam('time', '').toString(),
+      group: (route.params?.group ?? '---').toString(), 
+      id: (route.params?.id ?? '').toString(),
+      name: (route.params?.name ?? '').toString(),
+      penalties: (route.params?.penalties ?? '').toString(),
+      winch: (route.params?.winch ?? '').toString(),
+      time: (route.params?.time ?? '').toString(),
     };
 
     this.updateDriverResultAndBack = this.updateDriverResultAndBack.bind(this);
   }
 
   componentDidMount() {
-    this.props.navigation.setParams({ updateDriverResultAndBack: this.updateDriverResultAndBack });    
+    this.props.route.params.updateDriverResultAndBack = this.updateDriverResultAndBack;    
   }
 
   updateDriverResultAndBack() {
-    this.props.navigation.getParam('updateDriverResult')(this.state);
+    this.props.route.params.updateDriverResult(this.state);
     this.props.navigation.goBack();
   }
 
